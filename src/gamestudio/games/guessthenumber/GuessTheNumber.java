@@ -1,5 +1,6 @@
 package gamestudio.games.guessthenumber;
 
+import java.sql.SQLException;
 import java.util.Random;
 
 public class GuessTheNumber {
@@ -12,7 +13,10 @@ public class GuessTheNumber {
 		return guessedNumber= ran.nextInt(6) + 5;
 		}
 	
-	public static void startGuessTheNumber() {
+	public static void startGuessTheNumber() throws SQLException {
+		
+		String Game_name="GuessTheNumber";
+		gamestudio.services.ScoreServicesMethods.connectToDatabase(Game_name);
 		System.out.println("Not implemented yet :( ");
 	}
 }

@@ -1,5 +1,6 @@
 package gamestudio.games.miles;
 
+import java.sql.SQLException;
 import java.util.Random;
 
 import java.util.Scanner;
@@ -235,7 +236,9 @@ public class NPuzzle {
 		return elapsedTimeMillis;
 	}
 
-	public static void startMiles() {
+	public static void startMiles() throws SQLException {
+		String Game_name="Miles";
+		gamestudio.services.ScoreServicesMethods.connectToDatabase(Game_name);
 		StartGame();
 	}
 

@@ -1,14 +1,18 @@
 package gamestudio.games.hangman;
 
 
+import java.sql.SQLException;
 import java.util.*;
 
 public class HangMan {
 
-	public static void startHangMan() {
+	public static void startHangMan() throws SQLException {
 
 		char name[] = {};
 		int life = 13, win = 0;
+		
+		String Game_name="Hangman";
+		gamestudio.services.ScoreServicesMethods.connectToDatabase(Game_name);
 		
 		System.out.println("Enter the word by characters");
 	

@@ -1,5 +1,7 @@
 package gamestudio.games.minesweeper;
 
+import java.sql.SQLException;
+
 import gamestudio.games.minesweeper.consoleui.ConsoleUI;
 import gamestudio.games.minesweeper.consoleui.UserInterface;
 import gamestudio.games.minesweeper.core.Field;
@@ -41,12 +43,16 @@ public class Minesweeper {
 
 	/**
 	 * Main method.
+	 * @param game_name 
 	 * 
 	 * @param args
 	 *            arguments
 	 * @return 
+	 * @throws SQLException 
 	 */
-	public static void startMinesweeper() {
+	public static void startMinesweeper() throws SQLException {
+		String Game_name="Minesweeper";
+		gamestudio.services.ScoreServicesMethods.connectToDatabase(Game_name);
 		new Minesweeper();
 	}
 }

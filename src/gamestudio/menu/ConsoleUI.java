@@ -3,8 +3,14 @@ package gamestudio.menu;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 
+import gamestudio.entity.Comment;
 import gamestudio.games.guessthenumber.GuessTheNumber;
 import gamestudio.games.hangman.HangMan;
 import gamestudio.games.miles.NPuzzle;
@@ -15,23 +21,23 @@ public class ConsoleUI {
 	private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	
 	private enum Option {
-		MINESWEEPER, MILES, GUESSTHENUMBER, HANGMAN, EXIT
+		Minesweeper, Miles, GuessTheNumber, Hangman, EXIT
 	};
 
-	public void run() throws IOException, ParseException {
+	public void run() throws IOException, ParseException, SQLException {
 		while (true) {
 			switch (showMenu()) {
 
-			case MINESWEEPER:
+			case Minesweeper:
 				minesweeper();
 				break;
-			case MILES:
+			case Miles:
 				miles();
 				break;
-			case GUESSTHENUMBER:
+			case GuessTheNumber:
 				guessTheNumber();
 				break;
-			case HANGMAN:
+			case Hangman:
 				hangman();
 				break;
 			case EXIT:
@@ -40,28 +46,88 @@ public class ConsoleUI {
 		}
 	}
 	
-	private void hangman() {
+	private void hangman() throws SQLException {
 		HangMan.startHangMan();
 	}
 
-	private void guessTheNumber() {
+	private void guessTheNumber() throws SQLException {
 		GuessTheNumber.startGuessTheNumber();
 	}
 
-	private void miles() {
+	private void miles() throws SQLException {
+		String gameName="Miles";
+		System.out.println("Do you want to write a comment? Y or N");
+		String userInput=readLine().toUpperCase();
+		if(userInput.equals("Y")){
+			
+	    	Comment newComment = new Comment(0, 0, null);
+
+	    	newComment.setGame_id(findGameID(gameName));
+	    	newComment.setUser_id(findUserID());
+
+			//String findUserName="SELECT Userid FROM User_names WHERE User_name = ?";
+						
+			System.out.println("Please write down your comment.");
+			newComment.setUser_comment(readLine());
+	    	gamestudio.services.CommentServicesMethods.addComment(newComment,gameName);
+		}
 		NPuzzle.startMiles();
+
 	}
 
-	private void minesweeper() {
+	private int findUserID() {
+		return 1;
+
+		
+	}
+
+	private int findGameID(String gameName) {
+		
+		String findGameID="SELECT Gameid FROM Game WHERE Game_name = ?";
+		String URL = "jdbc:oracle:thin:@//localhost:1521/XE";
+		String USER = "gamestudiouser";
+		String PASSWORD = "gamestudiouser";
+		int gameID=0;
+		
+		try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+				PreparedStatement stmt = con.prepareStatement(findGameID)) {
+				stmt.setString(1, gameName);
+				ResultSet rs = stmt.executeQuery();
+
+				while(rs.next()){
+					gameID=rs.getInt(1);
+				}
+				
+				rs.close();
+				stmt.close();
+				con.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return gameID;	
+		
+	}
+
+	private void minesweeper() throws SQLException {
 		Minesweeper.startMinesweeper();
 	}
 
-	private Option showMenu() {
+	private Option showMenu() throws SQLException {
 		System.out.println("Menu.");
 		for (Option option : Option.values()) {
-			System.out.printf("%d. %s%n", option.ordinal() + 1, option);
+			//System.out.printf("%d. %s\t\t\t\t\t\t", option.ordinal() + 1, option,(option.toString().length() <= 11 ? "\t" : "\t\t"));		
+			if(option.toString().length()<=11){
+				System.out.printf("%d. %s\t\t\t\t\t\t", option.ordinal() + 1, option);	
+			}else{
+				System.out.printf("%d. %s\t\t\t\t\t", option.ordinal() + 1, option);	
+			}
+			String Game_name=option.toString();
+			gamestudio.services.RatingServicesMethods.averageRating(Game_name);
 		}
-		System.out.println("-----------------------------------------------");
+		System.out.println();
+		System.out.println("--------------------------------------------------------------------------------------------------------------------");
 
 		int selection = -1;
 		do {
@@ -73,13 +139,10 @@ public class ConsoleUI {
 	}
 
 	private String readLine() {
-
 		try {
 			return input.readLine();
 		} catch (IOException e) {
 			return null;
 		}
 	}
-	
-	
 }

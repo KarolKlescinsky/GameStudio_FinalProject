@@ -7,9 +7,11 @@ public interface RatingServices {
     public static final String URL = "jdbc:oracle:thin:@//localhost:1521/XE";
     public static final String USER = "register";
     public static final String PASSWORD = "register";
-    public static final String QUERY = "INSERT INTO users_table (user_id, user_name , user_phone) VALUES (?, ?, ?)";
+    public static final String QUERY = "Select g.GAME_NAME, count(r.RATING), AVG(r.RATING) from game g join rating r on r.GAMEID = g.GAMEID GROUP BY g.GAME_NAME;";
 	
 	public void addRating();
 	public List listOfRatings();
+	
+	public void averageRating();
 	
 }
