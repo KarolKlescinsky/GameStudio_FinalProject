@@ -2,38 +2,35 @@ package gamestudio.entity;
 
 public class Score {
 
-	private String playerName;
-	private String gameName;
-	private int gameScore;
+	private int user_id;
+	private int game_id;
+	private int user_score;
 	
-	public Score(String playerName, String gameName, int gameScore) {
-		this.playerName = playerName;
-		this.gameName = gameName;
-		this.gameScore = gameScore;
+	public Score(int user_id, int game_id, int user_score) {
+		this.user_id = user_id;
+		this.game_id = game_id;
+		this.user_score = user_score;
 	}
 	
-	public String getPlayerName() {
-		return playerName;
+	public int getUser_id() {
+		return user_id;
+	}
+	public int getGame_id() {
+		return game_id;
+	}
+	public int getUser_score() {
+		return user_score;
+	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+	public void setGame_id(int game_id) {
+		this.game_id = game_id;
+	}
+	public void setUser_score(int user_score) {
+		this.user_score = user_score;
 	}
 	
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
-	}
 	
-	public String getGameName() {
-		return gameName;
-	}
-	
-	public void setGameName(String gameName) {
-		this.gameName = gameName;
-	}
-	
-	public int getGameScore() {
-		return gameScore;
-	}
-	
-	public void setGameScore(int gameScore) {
-		this.gameScore = gameScore;
-	}
 		
 }

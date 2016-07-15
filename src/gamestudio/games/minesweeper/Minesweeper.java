@@ -51,9 +51,11 @@ public class Minesweeper {
 	 * @return 
 	 * @throws SQLException 
 	 */
-	public static void startMinesweeper() throws SQLException {
+	public static int startMinesweeper() throws SQLException {
 		String Game_name="Minesweeper";
 		new ScoreServicesMethods().printScoreboard(Game_name);
 		new Minesweeper();
+		int userScore;
+		return userScore=10;
 	}
 }

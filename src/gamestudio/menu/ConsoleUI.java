@@ -11,6 +11,7 @@ import gamestudio.games.miles.NPuzzle;
 import gamestudio.games.minesweeper.Minesweeper;
 import gamestudio.services.CommentServicesMethods;
 import gamestudio.services.RatingServicesMethods;
+import gamestudio.services.ScoreServicesMethods;
 import gamestudio.usefullmethods.ReadLine;
 
 public class ConsoleUI {
@@ -39,29 +40,28 @@ public class ConsoleUI {
 
 	private void hangman() throws SQLException {
 		String gameName = "Hangman";
-		HangMan.startHangMan();
 		new CommentServicesMethods().writeComment(gameName);
-
+		new ScoreServicesMethods().addScore(gameName, HangMan.startHangMan());
 	}
 
 	private void guessTheNumber() throws SQLException {
 		String gameName = "GuessTheNumber";
-		GuessTheNumber.startGuessTheNumber();
 		new CommentServicesMethods().writeComment(gameName);
+		new ScoreServicesMethods().addScore(gameName, GuessTheNumber.startGuessTheNumber());
 
 	}
 
 	private void miles() throws SQLException {
 		String gameName = "Miles";
-		NPuzzle.startMiles();
 		new CommentServicesMethods().writeComment(gameName);
+		new ScoreServicesMethods().addScore(gameName, NPuzzle.startMiles());
 
 	}
 
 	private void minesweeper() throws SQLException {
 		String gameName = "Minesweeper";
-		Minesweeper.startMinesweeper();
 		new CommentServicesMethods().writeComment(gameName);
+		new ScoreServicesMethods().addScore(gameName, Minesweeper.startMinesweeper());
 
 	}
 

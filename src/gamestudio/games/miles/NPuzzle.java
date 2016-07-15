@@ -235,10 +235,12 @@ public class NPuzzle {
 		return elapsedTimeMillis;
 	}
 
-	public static void startMiles() throws SQLException {
+	public static int startMiles() throws SQLException {
 		String Game_name="Miles";
 		new ScoreServicesMethods().printScoreboard(Game_name);
 		StartGame();
+		int userScore;
+		return userScore=10;
 	}
 
 }

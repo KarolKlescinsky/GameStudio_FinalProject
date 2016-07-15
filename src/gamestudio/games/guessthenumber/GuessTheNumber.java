@@ -9,6 +9,7 @@ import gamestudio.services.ScoreServicesMethods;
 
 public class GuessTheNumber {
 
+	public int score;
 	private int guessedNumber;
 	private int playersGuess;
 	private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -51,12 +52,13 @@ public class GuessTheNumber {
 		}
 	}
 
-	public static void startGuessTheNumber() throws SQLException {
+	public static int startGuessTheNumber() throws SQLException {
+		int userScore = 10;
 		String Game_name = "GuessTheNumber";
 		new ScoreServicesMethods().printScoreboard(Game_name);
 		new GuessTheNumber().guessTheNumberUI();
-
 //		GuessTheNumber gameStart = new GuessTheNumber();
 //		gameStart.guessTheNumberUI();
+		return userScore;
 	}
 }

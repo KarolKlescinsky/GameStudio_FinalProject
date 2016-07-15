@@ -8,7 +8,7 @@ import gamestudio.services.ScoreServicesMethods;
 
 public class HangMan {
 
-	public static void startHangMan() throws SQLException {
+	public static int startHangMan() throws SQLException {
 
 		char name[] = {};
 		int life = 13, win = 0;
@@ -77,5 +77,7 @@ public class HangMan {
 				break;
 			}
 		}
+		int userScore;
+		return userScore = 10;
 	}
 }

@@ -43,10 +43,8 @@ public class CommentServicesMethods implements CommentServices{
 		if (userInput.equals("Y")) {
 
 			Comment newComment = new Comment(0, 0, null);
-
 			newComment.setGame_id(findGameID(gameName));
 			newComment.setUser_id(findUserID());
-
 			System.out.println("Please write down your comment.");
 			newComment.setUser_comment(new ReadLine().readLine());
 			new CommentServicesMethods().addCommentToDatabase(newComment, gameName);
