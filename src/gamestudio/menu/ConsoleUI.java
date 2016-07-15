@@ -40,6 +40,7 @@ public class ConsoleUI {
 
 	private void hangman() throws SQLException {
 		String gameName = "Hangman";
+		new RatingServicesMethods().writeRating(gameName);
 		new CommentServicesMethods().writeComment(gameName);
 		new ScoreServicesMethods().addScore(gameName, HangMan.startHangMan());
 	}
@@ -48,6 +49,7 @@ public class ConsoleUI {
 		String gameName = "GuessTheNumber";
 		new CommentServicesMethods().writeComment(gameName);
 		new ScoreServicesMethods().addScore(gameName, GuessTheNumber.startGuessTheNumber());
+		new RatingServicesMethods().writeRating(gameName);
 
 	}
 
@@ -55,6 +57,7 @@ public class ConsoleUI {
 		String gameName = "Miles";
 		new CommentServicesMethods().writeComment(gameName);
 		new ScoreServicesMethods().addScore(gameName, NPuzzle.startMiles());
+		new RatingServicesMethods().writeRating(gameName);
 
 	}
 
@@ -62,6 +65,7 @@ public class ConsoleUI {
 		String gameName = "Minesweeper";
 		new CommentServicesMethods().writeComment(gameName);
 		new ScoreServicesMethods().addScore(gameName, Minesweeper.startMinesweeper());
+		new RatingServicesMethods().writeRating(gameName);
 
 	}
 

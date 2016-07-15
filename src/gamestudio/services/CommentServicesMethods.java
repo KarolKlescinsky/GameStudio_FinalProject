@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import gamestudio.database.DatabaseConnectionStats;
 import gamestudio.entity.Comment;
+import gamestudio.entity.Rating;
 import gamestudio.usefullmethods.ReadLine;
 
 public class CommentServicesMethods implements CommentServices{
@@ -136,7 +137,8 @@ public class CommentServicesMethods implements CommentServices{
 		return gameID;
 
 	}
-	
+
+
 	
 
 

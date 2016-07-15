@@ -6,7 +6,7 @@ public class DatabaseConnectionStats {
 	private static final String USER = "gamestudiouser";
 	private static final String PASSWORD = "gamestudiouser";
 
-	public static String getUrl() {
+	public static  String getUrl() {
 		return URL;
 	}
 
