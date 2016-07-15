@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import gamestudio.database.DatabaseConnectionStats;
 import gamestudio.entity.Comment;
 import gamestudio.games.guessthenumber.GuessTheNumber;
 import gamestudio.games.hangman.HangMan;
@@ -57,8 +58,8 @@ public class ConsoleUI {
 
 	private void guessTheNumber() throws SQLException {
 		String gameName = "GuessTheNumber";
-		GuessTheNumber.startGuessTheNumber();
 		writeComment(gameName);
+		GuessTheNumber.startGuessTheNumber();
 
 	}
 
@@ -96,13 +97,10 @@ public class ConsoleUI {
 
 		String findGameID = "SELECT Userid FROM User_names WHERE User_name = ?";
 		String insertNewUser = "insert into User_names (Userid, User_name) values (ids.nextval, ?)";
-		String URL = "jdbc:oracle:thin:@//localhost:1521/XE";
-		String USER = "gamestudiouser";
-		String PASSWORD = "gamestudiouser";
 		String userName = System.getProperty("user.name");
 		int userID = 0;
 
-		try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
+		try (Connection con = DriverManager.getConnection(DatabaseConnectionStats.getUrl(), DatabaseConnectionStats.getUser(), DatabaseConnectionStats.getPassword());
 
 				PreparedStatement stmt = con.prepareStatement(findGameID)) {
 			stmt.setString(1, userName);
@@ -121,7 +119,7 @@ public class ConsoleUI {
 		}
 
 		if (userID == 0) {
-			try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
+			try (Connection con = DriverManager.getConnection(DatabaseConnectionStats.getUrl(), DatabaseConnectionStats.getUser(), DatabaseConnectionStats.getPassword());
 
 					PreparedStatement stmt2 = con.prepareStatement(insertNewUser)) {
 				stmt2.setString(1, userName);
@@ -135,7 +133,7 @@ public class ConsoleUI {
 			}
 		}
 
-		try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
+		try (Connection con = DriverManager.getConnection(DatabaseConnectionStats.getUrl(), DatabaseConnectionStats.getUser(), DatabaseConnectionStats.getPassword());
 
 				PreparedStatement stmt = con.prepareStatement(findGameID)) {
 			stmt.setString(1, userName);
@@ -158,12 +156,9 @@ public class ConsoleUI {
 	private int findGameID(String gameName) {
 
 		String findGameID = "SELECT Gameid FROM Game WHERE Game_name = ?";
-		String URL = "jdbc:oracle:thin:@//localhost:1521/XE";
-		String USER = "gamestudiouser";
-		String PASSWORD = "gamestudiouser";
 		int gameID = 0;
 
-		try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
+		try (Connection con = DriverManager.getConnection(DatabaseConnectionStats.getUrl(), DatabaseConnectionStats.getUser(), DatabaseConnectionStats.getPassword());
 
 				PreparedStatement stmt = con.prepareStatement(findGameID)) {
 			stmt.setString(1, gameName);
