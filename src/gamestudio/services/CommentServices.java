@@ -4,6 +4,6 @@ import gamestudio.entity.Comment;
 
 public interface CommentServices {
 	
-	public void addComment(Comment newComment, String gameName);
+	public void addCommentToDatabase(Comment newComment, String gameName);
 	
 }

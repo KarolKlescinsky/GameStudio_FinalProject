@@ -1,11 +1,10 @@
 package gamestudio.games.miles;
 
 import java.sql.SQLException;
+
 import java.util.Random;
-
-import java.util.Scanner;
-
 import gamestudio.services.ScoreServicesMethods;
+import gamestudio.usefullmethods.ReadLine;
 
 public class NPuzzle {
 
@@ -93,13 +92,11 @@ public class NPuzzle {
 	private int[][] update(int[][] moje2Pole) {
 		getStartTime();
 		printNPuzzle(moje2Pole);
-		Scanner userInput = new Scanner(System.in);
 		System.out.println("Enter 'UP' or 'DOWN' or 'LEFT' or 'RIGHT' .");
 		System.out.println("Or if you are lazy... Enter 'W' or 'A' or 'S' or 'D' for movement.");
 		System.out.println("Or if you are really really really lazy... Enter 'exit'.");
 		System.out.println("Enter 'new' if you want to start a new game.");
-		String input = userInput.next();
-		input = input.toUpperCase();
+		String input = new ReadLine().readLine().toUpperCase();
 
 		try {
 			input = input.toUpperCase();
