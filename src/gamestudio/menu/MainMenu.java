@@ -8,13 +8,13 @@ public class MainMenu {
 
 	public static void main(String[] args) throws SQLException {
 
-		 ConsoleUI ui = new ConsoleUI();
-		 try {
-		 ui.run();
-		 } catch (IOException | ParseException e) {
-		 // TODO Auto-generated catch block
-		 e.printStackTrace();
-		 }
-		 
+		ConsoleUI ui = new ConsoleUI();
+		try {
+			ui.run();
+		} catch (IOException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }

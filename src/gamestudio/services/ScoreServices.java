@@ -1,11 +1,10 @@
 package gamestudio.services;
 
-import java.util.List;
+import java.sql.SQLException;
 
 public interface ScoreServices {
 	
-	public void addScore();
-	public List listOfScores();
+	public void printScoreboard(String Game_name) throws SQLException;
 	
    
 	

@@ -15,11 +15,13 @@ import gamestudio.games.guessthenumber.GuessTheNumber;
 import gamestudio.games.hangman.HangMan;
 import gamestudio.games.miles.NPuzzle;
 import gamestudio.games.minesweeper.Minesweeper;
+import gamestudio.services.CommentServicesMethods;
+import gamestudio.services.RatingServicesMethods;
 
 public class ConsoleUI {
-	
+
 	private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-	
+
 	private enum Option {
 		Minesweeper, Miles, GuessTheNumber, Hangman, EXIT
 	};
@@ -45,89 +47,159 @@ public class ConsoleUI {
 			}
 		}
 	}
-	
+
 	private void hangman() throws SQLException {
+		String gameName = "Hangman";
 		HangMan.startHangMan();
+		writeComment(gameName);
+
 	}
 
 	private void guessTheNumber() throws SQLException {
+		String gameName = "GuessTheNumber";
 		GuessTheNumber.startGuessTheNumber();
+		writeComment(gameName);
+
 	}
 
 	private void miles() throws SQLException {
-		String gameName="Miles";
+		String gameName = "Miles";
+		NPuzzle.startMiles();
+		writeComment(gameName);
+
+	}
+
+	private void minesweeper() throws SQLException {
+		String gameName = "Minesweeper";
+		Minesweeper.startMinesweeper();
+		writeComment(gameName);
+
+	}
+
+	private void writeComment(String gameName) {
 		System.out.println("Do you want to write a comment? Y or N");
-		String userInput=readLine().toUpperCase();
-		if(userInput.equals("Y")){
-			
-	    	Comment newComment = new Comment(0, 0, null);
+		String userInput = readLine().toUpperCase();
+		if (userInput.equals("Y")) {
 
-	    	newComment.setGame_id(findGameID(gameName));
-	    	newComment.setUser_id(findUserID());
+			Comment newComment = new Comment(0, 0, null);
 
-			//String findUserName="SELECT Userid FROM User_names WHERE User_name = ?";
-						
+			newComment.setGame_id(findGameID(gameName));
+			newComment.setUser_id(findUserID());
+
 			System.out.println("Please write down your comment.");
 			newComment.setUser_comment(readLine());
-	    	gamestudio.services.CommentServicesMethods.addComment(newComment,gameName);
+			new CommentServicesMethods().addComment(newComment, gameName);
 		}
-		NPuzzle.startMiles();
-
 	}
 
 	private int findUserID() {
-		return 1;
 
-		
-	}
-
-	private int findGameID(String gameName) {
-		
-		String findGameID="SELECT Gameid FROM Game WHERE Game_name = ?";
+		String findGameID = "SELECT Userid FROM User_names WHERE User_name = ?";
+		String insertNewUser = "insert into User_names (Userid, User_name) values (ids.nextval, ?)";
 		String URL = "jdbc:oracle:thin:@//localhost:1521/XE";
 		String USER = "gamestudiouser";
 		String PASSWORD = "gamestudiouser";
-		int gameID=0;
-		
+		String userName = System.getProperty("user.name");
+		int userID = 0;
+
 		try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
 
 				PreparedStatement stmt = con.prepareStatement(findGameID)) {
-				stmt.setString(1, gameName);
-				ResultSet rs = stmt.executeQuery();
+			stmt.setString(1, userName);
+			ResultSet rs = stmt.executeQuery();
 
-				while(rs.next()){
-					gameID=rs.getInt(1);
-				}
-				
-				rs.close();
-				stmt.close();
+			while (rs.next()) {
+				userID = rs.getInt(1);
+			}
+
+			rs.close();
+			stmt.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		if (userID == 0) {
+			try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+					PreparedStatement stmt2 = con.prepareStatement(insertNewUser)) {
+				stmt2.setString(1, userName);
+				stmt2.executeUpdate();
+
+				stmt2.close();
 				con.close();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		return gameID;	
-		
+		}
+
+		try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+				PreparedStatement stmt = con.prepareStatement(findGameID)) {
+			stmt.setString(1, userName);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				userID = rs.getInt(1);
+			}
+
+			rs.close();
+			stmt.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return userID;
 	}
 
-	private void minesweeper() throws SQLException {
-		Minesweeper.startMinesweeper();
+	private int findGameID(String gameName) {
+
+		String findGameID = "SELECT Gameid FROM Game WHERE Game_name = ?";
+		String URL = "jdbc:oracle:thin:@//localhost:1521/XE";
+		String USER = "gamestudiouser";
+		String PASSWORD = "gamestudiouser";
+		int gameID = 0;
+
+		try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+				PreparedStatement stmt = con.prepareStatement(findGameID)) {
+			stmt.setString(1, gameName);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				gameID = rs.getInt(1);
+			}
+
+			rs.close();
+			stmt.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return gameID;
+
 	}
 
 	private Option showMenu() throws SQLException {
 		System.out.println("Menu.");
 		for (Option option : Option.values()) {
-			//System.out.printf("%d. %s\t\t\t\t\t\t", option.ordinal() + 1, option,(option.toString().length() <= 11 ? "\t" : "\t\t"));		
-			if(option.toString().length()<=11){
-				System.out.printf("%d. %s\t\t\t\t\t\t", option.ordinal() + 1, option);	
-			}else{
-				System.out.printf("%d. %s\t\t\t\t\t", option.ordinal() + 1, option);	
+			// System.out.printf("%d. %s\t\t\t\t\t\t", option.ordinal() + 1,
+			// option,(option.toString().length() <= 11 ? "\t" : "\t\t"));
+			if (option.toString().length() <= 11) {
+				System.out.printf("%d. %s\t\t\t\t\t\t", option.ordinal() + 1, option);
+			} else {
+				System.out.printf("%d. %s\t\t\t\t\t", option.ordinal() + 1, option);
 			}
-			String Game_name=option.toString();
-			gamestudio.services.RatingServicesMethods.averageRating(Game_name);
+			String Game_name = option.toString();
+			new RatingServicesMethods().averageRating(Game_name);
 		}
 		System.out.println();
-		System.out.println("--------------------------------------------------------------------------------------------------------------------");
+		System.out.println(
+				"--------------------------------------------------------------------------------------------------------------------");
 
 		int selection = -1;
 		do {

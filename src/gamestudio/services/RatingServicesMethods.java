@@ -7,14 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class RatingServicesMethods {
+public class RatingServicesMethods implements RatingServices {
 
 	public static final String URL = "jdbc:oracle:thin:@//localhost:1521/XE";
 	public static final String USER = "gamestudiouser";
 	public static final String PASSWORD = "gamestudiouser";
 	public static final String QUERY = "Select AVG(r.RATING), count(r.RATING) from game g join rating r on r.GAMEID = g.GAMEID WHERE Game_name = ? GROUP BY g.GAME_NAME";
 
-	public static void averageRating(String Game_name) throws SQLException {
+	public void averageRating(String Game_name) throws SQLException {
 
 		try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
 

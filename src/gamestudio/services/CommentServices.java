@@ -1,10 +1,9 @@
 package gamestudio.services;
 
-import java.util.List;
+import gamestudio.entity.Comment;
 
 public interface CommentServices {
 	
-	public void addComment();
-	public List listOfComments();
+	public void addComment(Comment newComment, String gameName);
 	
 }

@@ -5,6 +5,8 @@ import java.util.Random;
 
 import java.util.Scanner;
 
+import gamestudio.services.ScoreServicesMethods;
+
 public class NPuzzle {
 
 	static long start = System.currentTimeMillis();
@@ -238,7 +240,7 @@ public class NPuzzle {
 
 	public static void startMiles() throws SQLException {
 		String Game_name="Miles";
-		gamestudio.services.ScoreServicesMethods.connectToDatabase(Game_name);
+		new ScoreServicesMethods().printScoreboard(Game_name);
 		StartGame();
 	}
 
