@@ -1,6 +1,7 @@
 package gamestudio.services;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +9,6 @@ import java.sql.SQLException;
 
 import gamestudio.database.DatabaseConnectionStats;
 import gamestudio.entity.Comment;
-import gamestudio.entity.Rating;
 import gamestudio.usefullmethods.ReadLine;
 
 public class CommentServicesMethods implements CommentServices{
@@ -42,7 +42,6 @@ public class CommentServicesMethods implements CommentServices{
 		System.out.println("Do you want to write a comment? Y or N");
 		String userInput = new ReadLine().readLine().toUpperCase();
 		if (userInput.equals("Y")) {
-
 			Comment newComment = new Comment(0, 0, null);
 			newComment.setGame_id(findGameID(gameName));
 			newComment.setUser_id(findUserID());
@@ -137,6 +136,8 @@ public class CommentServicesMethods implements CommentServices{
 		return gameID;
 
 	}
+
+
 
 
 	

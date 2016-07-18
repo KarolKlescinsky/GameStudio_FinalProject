@@ -2,6 +2,7 @@ package gamestudio.services;
 
 import java.sql.Connection;
 
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,7 +82,7 @@ public class RatingServicesMethods implements RatingServices {
 
 	}
 
-	private boolean isUserAndGameUnique(String gameName) {
+	public boolean isUserAndGameUnique(String gameName) {
 
 		boolean isUnique = false;
 
@@ -132,7 +133,7 @@ public class RatingServicesMethods implements RatingServices {
 		newRating.setUser_rating(Integer.parseInt(userRating));
 	}
 
-	private int findUserID() {
+	public int findUserID() {
 
 		String userName = System.getProperty("user.name");
 		int userID = 0;

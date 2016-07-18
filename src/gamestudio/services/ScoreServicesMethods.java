@@ -2,15 +2,14 @@ package gamestudio.services;
 
 import java.sql.Connection;
 
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import gamestudio.database.DatabaseConnectionStats;
-import gamestudio.entity.Comment;
 import gamestudio.entity.Score;
-import gamestudio.usefullmethods.ReadLine;
 
 public class ScoreServicesMethods implements ScoreServices {
 
@@ -39,7 +38,6 @@ public class ScoreServicesMethods implements ScoreServices {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 	
 	public void addScoreToDatabase(Score newScore, String gameName, int userScore){
@@ -60,7 +58,6 @@ public class ScoreServicesMethods implements ScoreServices {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		
 	}
 	
 	public void addScore(String gameName,int userScore){

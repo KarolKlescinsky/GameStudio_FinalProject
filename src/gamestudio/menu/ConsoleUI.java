@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import gamestudio.entity.CommentJPA;
 import gamestudio.games.guessthenumber.GuessTheNumber;
 import gamestudio.games.hangman.HangMan;
 import gamestudio.games.miles.NPuzzle;
 import gamestudio.games.minesweeper.Minesweeper;
+import gamestudio.jpa.CommentServiceJpa;
 import gamestudio.services.CommentServicesMethods;
 import gamestudio.services.RatingServicesMethods;
 import gamestudio.services.ScoreServicesMethods;
@@ -40,6 +42,8 @@ public class ConsoleUI {
 
 	private void hangman() throws SQLException {
 		String gameName = "Hangman";
+		String userName = System.getProperty("user.name");
+//		new CommentServiceJpa().addCommentToDatabase(new CommentJPA(userName, gameName, "Jpa test"));
 		new RatingServicesMethods().writeRating(gameName);
 		new CommentServicesMethods().writeComment(gameName);
 		new ScoreServicesMethods().addScore(gameName, HangMan.startHangMan());

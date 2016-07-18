@@ -1,12 +1,17 @@
 package gamestudio.jpa;
 
+import javax.persistence.EntityManager;
 
-import gamestudio.entity.Comment;
-
+import gamestudio.entity.CommentJPA;
+import sk.ness.jpa.JpaHelper;
 
 public class CommentServiceJpa {
 
-	Comment comment = new Comment();
-	
-	
+	public void addCommentToDatabase(CommentJPA comment ) {
+		JpaHelper.beginTransaction();
+		EntityManager em = JpaHelper.getEntityManager();		
+		em.persist(comment);
+		JpaHelper.commitTransaction();
+		
+	}	
 }
