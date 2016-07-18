@@ -5,12 +5,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-import gamestudio.entity.CommentJPA;
 import gamestudio.games.guessthenumber.GuessTheNumber;
 import gamestudio.games.hangman.HangMan;
 import gamestudio.games.miles.NPuzzle;
 import gamestudio.games.minesweeper.Minesweeper;
-import gamestudio.jpa.CommentServiceJpa;
 import gamestudio.services.CommentServicesMethods;
 import gamestudio.services.RatingServicesMethods;
 import gamestudio.services.ScoreServicesMethods;
@@ -43,34 +41,39 @@ public class ConsoleUI {
 	private void hangman() throws SQLException {
 		String gameName = "Hangman";
 		String userName = System.getProperty("user.name");
-//		new CommentServiceJpa().addCommentToDatabase(new CommentJPA(userName, gameName, "Jpa test"));
+		// new CommentServiceJpa().addCommentToDatabase(new CommentJPA(userName,
+		// gameName, "Jpa test"));
+		new HangMan().startHangMan();
+		new CommentServicesMethods().writeComment(gameName, userName);
+		new ScoreServicesMethods().addScore(gameName, new HangMan().sendScore());
 		new RatingServicesMethods().writeRating(gameName);
-		new CommentServicesMethods().writeComment(gameName);
-		new ScoreServicesMethods().addScore(gameName, HangMan.startHangMan());
 	}
 
 	private void guessTheNumber() throws SQLException {
 		String gameName = "GuessTheNumber";
-		new CommentServicesMethods().writeComment(gameName);
-		new ScoreServicesMethods().addScore(gameName, GuessTheNumber.startGuessTheNumber());
+		String userName = System.getProperty("user.name");
+		new GuessTheNumber().startGuessTheNumber();
+		new CommentServicesMethods().writeComment(gameName, userName);
+		new ScoreServicesMethods().addScore(gameName, new GuessTheNumber().sendScore());
 		new RatingServicesMethods().writeRating(gameName);
-
 	}
 
 	private void miles() throws SQLException {
 		String gameName = "Miles";
-		new CommentServicesMethods().writeComment(gameName);
-		new ScoreServicesMethods().addScore(gameName, NPuzzle.startMiles());
+		String userName = System.getProperty("user.name");
+		new NPuzzle().startMiles();
+		new CommentServicesMethods().writeComment(gameName, userName);
+		new ScoreServicesMethods().addScore(gameName, new NPuzzle().sendScore());
 		new RatingServicesMethods().writeRating(gameName);
-
 	}
 
 	private void minesweeper() throws SQLException {
 		String gameName = "Minesweeper";
-		new CommentServicesMethods().writeComment(gameName);
-		new ScoreServicesMethods().addScore(gameName, Minesweeper.startMinesweeper());
+		String userName = System.getProperty("user.name");
+		new Minesweeper().startMinesweeper();
+		new CommentServicesMethods().writeComment(gameName, userName);
+		new ScoreServicesMethods().addScore(gameName, new Minesweeper().sendScore());
 		new RatingServicesMethods().writeRating(gameName);
-
 	}
 
 	private Option showMenu() throws SQLException {
@@ -95,7 +98,6 @@ public class ConsoleUI {
 			System.out.println("Option: ");
 			selection = Integer.parseInt(new ReadLine().readLine());
 		} while (selection <= 0 || selection > Option.values().length);
-
 		return Option.values()[selection - 1];
 	}
 

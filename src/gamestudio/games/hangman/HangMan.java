@@ -1,6 +1,5 @@
 package gamestudio.games.hangman;
 
-
 import java.sql.SQLException;
 import java.util.*;
 
@@ -8,39 +7,39 @@ import gamestudio.services.ScoreServicesMethods;
 
 public class HangMan {
 
-	public static int startHangMan() throws SQLException {
+	public void startHangMan() throws SQLException {
 
 		char name[] = {};
 		int life = 13, win = 0;
-		
-		String Game_name="Hangman";
+
+		String Game_name = "Hangman";
 		new ScoreServicesMethods().printScoreboard(Game_name);
-		
+
 		System.out.println("Enter the word by characters");
-	
+
 		List<String> list = new ArrayList<String>();
-        Scanner stdin = new Scanner(System.in);
+		@SuppressWarnings("resource")
+		Scanner stdin = new Scanner(System.in);
 
-        do {
-            System.out.println("Current list is " + list);
-            System.out.println("Add more? (y/n)");
-            if (stdin.next().startsWith("y")) {
-                System.out.println("Enter : ");
-                list.add(stdin.next());
-            } else {
-                break;
-            }
-        } while (true);
+		do {
+			System.out.println("Current list is " + list);
+			System.out.println("Add more? (y/n)");
+			if (stdin.next().startsWith("y")) {
+				System.out.println("Enter : ");
+				list.add(stdin.next());
+			} else {
+				break;
+			}
+		} while (true);
 
-        System.out.println("List is " + list);
-        String[] arr = list.toArray(new String[0]);
-        System.out.println("Array is " + Arrays.toString(arr));
-		
-		
+		System.out.println("List is " + list);
+		String[] arr = list.toArray(new String[0]);
+		System.out.println("Array is " + Arrays.toString(arr));
 
 		while (life > 0) {
 
 			System.out.println("Lifes: " + life);
+			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("Enter a character: ");
 			char c = scanner.next().charAt(0);
@@ -64,8 +63,7 @@ public class HangMan {
 					}
 
 					break;
-				}
-				else{
+				} else {
 					System.out.println("Bad one! Your guess " + c + " was wrong!");
 
 				}
@@ -77,7 +75,10 @@ public class HangMan {
 				break;
 			}
 		}
-		int userScore;
-		return userScore = 10;
+	}
+
+	public int sendScore() {
+		int userScore = 10;
+		return userScore;
 	}
 }

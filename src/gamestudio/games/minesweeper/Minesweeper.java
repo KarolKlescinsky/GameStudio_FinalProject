@@ -30,7 +30,7 @@ public class Minesweeper {
 		return instance;
 	}
 
-	private Minesweeper() {
+	public Minesweeper() {
 		instance = this;
 		startMillis = System.currentTimeMillis();
 		userInterface = new ConsoleUI();
@@ -44,18 +44,23 @@ public class Minesweeper {
 
 	/**
 	 * Main method.
-	 * @param game_name 
+	 * 
+	 * @param game_name
 	 * 
 	 * @param args
 	 *            arguments
-	 * @return 
-	 * @throws SQLException 
+	 * @return
+	 * @throws SQLException
 	 */
-	public static int startMinesweeper() throws SQLException {
-		String Game_name="Minesweeper";
+	public void startMinesweeper() throws SQLException {
+		String Game_name = "Minesweeper";
 		new ScoreServicesMethods().printScoreboard(Game_name);
 		new Minesweeper();
-		int userScore;
-		return userScore=10;
 	}
+
+	public int sendScore() {
+		int userScore = 10;
+		return userScore;
+	}
+
 }

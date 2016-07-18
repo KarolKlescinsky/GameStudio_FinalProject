@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Settings implements Serializable {
 
 	private int rowCount = 0;
@@ -44,6 +45,7 @@ public class Settings implements Serializable {
 
 	public void save() throws Exception {
 		FileOutputStream out = new FileOutputStream(SETTING_FILE);
+		@SuppressWarnings("resource")
 		ObjectOutputStream s = new ObjectOutputStream(out);
 		if (getColumnCount() == 9) {
 			s.writeObject(BEGINNER);
@@ -60,9 +62,7 @@ public class Settings implements Serializable {
 
 		FileInputStream in = new FileInputStream(SETTING_FILE);
 		ObjectInputStream s = new ObjectInputStream(in);
-		String text = (String) s.readObject();
 		s.close();
 		return null;
 	}
-
 }

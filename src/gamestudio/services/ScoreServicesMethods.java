@@ -65,7 +65,6 @@ public class ScoreServicesMethods implements ScoreServices {
 			Score newScore = new Score(0, 0, 0);
 			newScore.setGame_id(findGameID(gameName));
 			newScore.setUser_id(findUserID());
-			System.out.println("Please write down score.");
 			newScore.setUser_score(userScore);
 			new ScoreServicesMethods().addScoreToDatabase(newScore, gameName, userScore);
 		

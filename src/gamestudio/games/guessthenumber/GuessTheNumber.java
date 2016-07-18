@@ -9,7 +9,7 @@ import gamestudio.services.ScoreServicesMethods;
 
 public class GuessTheNumber {
 
-	public int score;
+	private static int guessCounter=0;
 	private int guessedNumber;
 	private int playersGuess;
 	private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -28,7 +28,6 @@ public class GuessTheNumber {
 		}
 		if (playersGuess < guessedNumber) {
 			System.out.println("Bad guess. The number you are trying to guess is higher.");
-
 		}
 		return false;
 	}
@@ -40,6 +39,7 @@ public class GuessTheNumber {
 		do {
 			System.out.println("Write down your guess.");
 			playersGuess = Integer.parseInt(readLine());
+			guessCounter++;
 		} while (!isGuessed());
 
 	}
@@ -51,14 +51,20 @@ public class GuessTheNumber {
 			return null;
 		}
 	}
+	
+	public int sendScore(){
+		int userScore=0;
+		if(isGuessed()){
+		userScore = 100 - guessCounter;
+		}
+		return userScore;
+	}
 
-	public static int startGuessTheNumber() throws SQLException {
-		int userScore = 10;
+	public void startGuessTheNumber() throws SQLException {
 		String Game_name = "GuessTheNumber";
 		new ScoreServicesMethods().printScoreboard(Game_name);
 		new GuessTheNumber().guessTheNumberUI();
 //		GuessTheNumber gameStart = new GuessTheNumber();
 //		gameStart.guessTheNumberUI();
-		return userScore;
 	}
 }

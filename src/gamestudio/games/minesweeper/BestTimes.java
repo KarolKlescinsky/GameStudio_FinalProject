@@ -1,7 +1,6 @@
 package gamestudio.games.minesweeper;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Formatter;
 import java.util.Iterator;
@@ -47,6 +46,7 @@ public class BestTimes implements Iterable<BestTimes.PlayerTime> {
 	 */
 	public String toString() {
 
+		@SuppressWarnings("resource")
 		Formatter f = new Formatter();
 
 		return f.toString();

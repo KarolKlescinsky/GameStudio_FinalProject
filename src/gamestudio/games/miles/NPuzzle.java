@@ -111,62 +111,30 @@ public class NPuzzle {
 				if (moje2Pole[x][y] == 0) {
 
 					if (input.equals("W") || input.equals("UP")) {
-						if (x == getSirka() - 1) {
-							System.out.println("Cant move there. Try again.");
-							break;
-						}
-						moje2Pole[x][y] = moje2Pole[x + 1][y];
-						moje2Pole[x + 1][y] = 0;
-						change = true;
+						moveUp(moje2Pole, x, y);
 						break;
 					} else {
 
 						if (input.equals("S") || input.equals("DOWN")) {
-							if (x == 0) {
-								System.out.println("Cant move there.");
-								break;
-							}
-							moje2Pole[x][y] = moje2Pole[x - 1][y];
-							moje2Pole[x - 1][y] = 0;
-							change = true;
+							moveDown(moje2Pole, x, y);
 							break;
 						} else {
 
 							if (input.equals("A") || input.equals("LEFT")) {
-								if (y == getDlzka() - 1) {
-									System.out.println("Cant move there.");
-									break;
-								}
-								moje2Pole[x][y] = moje2Pole[x][y + 1];
-								moje2Pole[x][y + 1] = 0;
-								change = true;
+								moveLeft(moje2Pole, x, y);
 								break;
 							} else {
 
 								if (input.equals("D") || input.equals("RIGHT")) {
-									if (y == 0) {
-										System.out.println("Cant move there.");
-										break;
-									}
-									moje2Pole[x][y] = moje2Pole[x][y - 1];
-									moje2Pole[x][y - 1] = 0;
-									change = true;
+									moveRight(moje2Pole, x, y);
 									break;
 								} else {
-									if (input.equals("EXIT")) {
-										System.out.println("Your time was: " + getStartTime() + "seconds");
-										System.exit(0);
-									} else {
-										if (input.equals("NEW")) {
-											StartGame();
-										}
-									}
+									exitAndNewGame(input);
 								}
 								if (change) {
 									break;
 								}
 							}
-						
 						}
 					}
 				}
@@ -175,7 +143,54 @@ public class NPuzzle {
 		return moje2Pole;
 	}
 
-	public boolean isSorted(int[][] moje2Pole) {
+	public void exitAndNewGame(String input) {
+		if (input.equals("EXIT")) {
+			System.out.println("Your time was: " + getStartTime() + "seconds");
+			System.exit(0);
+		} else {
+			if (input.equals("NEW")) {
+				StartGame();
+			}
+		}
+	}
+
+	public void moveRight(int[][] moje2Pole, int length, int width) {
+		if (width == 0) {
+			System.out.println("Cant move there.");
+		} else {
+			moje2Pole[length][width] = moje2Pole[length][width - 1];
+			moje2Pole[length][width - 1] = 0;
+		}
+	}
+
+	public void moveLeft(int[][] moje2Pole, int length, int width) {
+		if (width == getDlzka() - 1) {
+			System.out.println("Cant move there.");
+		} else {
+			moje2Pole[length][width] = moje2Pole[length][width + 1];
+			moje2Pole[length][width + 1] = 0;
+		}
+	}
+
+	public void moveDown(int[][] moje2Pole, int length, int width) {
+		if (length == 0) {
+			System.out.println("Cant move there.");
+		} else {
+			moje2Pole[length][width] = moje2Pole[length - 1][width];
+			moje2Pole[length - 1][width] = 0;
+		}
+	}
+
+	public void moveUp(int[][] moje2Pole, int length, int width) {
+		if (length == getDlzka() - 1) {
+			System.out.println("Cant move there. Try again.");
+		} else {
+			moje2Pole[length][width] = moje2Pole[length - 1][width];
+			moje2Pole[length + 1][width] = 0;
+		}
+	}
+
+	public boolean isSorted(int moje2Pole[][]) {
 
 		boolean help = false;
 		for (int i = 0; i < moje2Pole.length; i++) {
@@ -235,12 +250,18 @@ public class NPuzzle {
 		return elapsedTimeMillis;
 	}
 
-	public static int startMiles() throws SQLException {
-		String Game_name="Miles";
+	public void startMiles() throws SQLException {
+		String Game_name = "Miles";
 		new ScoreServicesMethods().printScoreboard(Game_name);
 		StartGame();
-		int userScore;
-		return userScore=10;
+	}
+
+	public int sendScore() {
+		int userScore = 0;
+		// TODO: if(isSorted(moje2Pole)){
+		userScore = (int) getStartTime();
+		// }
+		return userScore;
 	}
 
 }

@@ -13,9 +13,9 @@ import gamestudio.usefullmethods.ReadLine;
 
 public class CommentServicesMethods implements CommentServices{
 
-
     public static final String QUERY = "insert into User_Comments (COMMENTID,GAMEID,USERID,USER_COMMENT) values (ids.nextval,?,?,?)";
-    
+    public static final String findGameID = "SELECT Userid FROM User_names WHERE User_name = ?";
+    public static final String insertNewUser = "insert into User_names (Userid, User_name) values (ids.nextval, ?)";
     
 	public void addCommentToDatabase(Comment newComment, String gameName) {
 	    			
@@ -26,7 +26,6 @@ public class CommentServicesMethods implements CommentServices{
 					stmt.setInt(2, newComment.getUser_id());
 					stmt.setString(3, newComment.getUser_comment());
 
-					
 					ResultSet rs = stmt.executeQuery();
 
 					rs.close();
@@ -38,43 +37,23 @@ public class CommentServicesMethods implements CommentServices{
 				}
 	}
 	
-	public void writeComment(String gameName) {
+	public void writeComment(String gameName,String userName) {
 		System.out.println("Do you want to write a comment? Y or N");
 		String userInput = new ReadLine().readLine().toUpperCase();
 		if (userInput.equals("Y")) {
 			Comment newComment = new Comment(0, 0, null);
 			newComment.setGame_id(findGameID(gameName));
-			newComment.setUser_id(findUserID());
+			newComment.setUser_id(findUserID(userName));
 			System.out.println("Please write down your comment.");
 			newComment.setUser_comment(new ReadLine().readLine());
 			new CommentServicesMethods().addCommentToDatabase(newComment, gameName);
 		}
 	}
 	
-	private int findUserID() {
+	private int findUserID(String userName) {
 
-		String findGameID = "SELECT Userid FROM User_names WHERE User_name = ?";
-		String insertNewUser = "insert into User_names (Userid, User_name) values (ids.nextval, ?)";
-		String userName = System.getProperty("user.name");
 		int userID = 0;
-
-		try (Connection con = DriverManager.getConnection(DatabaseConnectionStats.getUrl(), DatabaseConnectionStats.getUser(), DatabaseConnectionStats.getPassword());
-
-				PreparedStatement stmt = con.prepareStatement(findGameID)) {
-			stmt.setString(1, userName);
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()) {
-				userID = rs.getInt(1);
-			}
-
-			rs.close();
-			stmt.close();
-			con.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		userID = checkIfUserExists(userName, userID);
 
 		if (userID == 0) {
 			try (Connection con = DriverManager.getConnection(DatabaseConnectionStats.getUrl(), DatabaseConnectionStats.getUser(), DatabaseConnectionStats.getPassword());
@@ -91,6 +70,11 @@ public class CommentServicesMethods implements CommentServices{
 			}
 		}
 
+		userID = checkIfUserExists(userName, userID);
+		return userID;
+	}
+
+	public int checkIfUserExists(String userName, int userID) {
 		try (Connection con = DriverManager.getConnection(DatabaseConnectionStats.getUrl(), DatabaseConnectionStats.getUser(), DatabaseConnectionStats.getPassword());
 
 				PreparedStatement stmt = con.prepareStatement(findGameID)) {
@@ -136,12 +120,4 @@ public class CommentServicesMethods implements CommentServices{
 		return gameID;
 
 	}
-
-
-
-
-	
-
-
-
 }
