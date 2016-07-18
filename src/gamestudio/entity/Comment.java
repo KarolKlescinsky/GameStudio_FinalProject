@@ -12,6 +12,10 @@ public class Comment {
 		this.user_comment = user_comment;
 	}
 	
+	public Comment() {
+		this(0,0,"hhhh");
+	}
+	
 	public int getUser_id() {
 		return user_id;
 	}
