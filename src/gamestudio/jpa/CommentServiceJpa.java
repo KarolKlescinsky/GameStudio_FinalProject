@@ -2,6 +2,7 @@ package gamestudio.jpa;
 
 import javax.persistence.EntityManager;
 
+
 import gamestudio.entity.CommentJPA;
 import sk.ness.jpa.JpaHelper;
 
