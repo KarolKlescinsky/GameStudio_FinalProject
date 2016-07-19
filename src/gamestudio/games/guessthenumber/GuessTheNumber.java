@@ -1,12 +1,9 @@
 package gamestudio.games.guessthenumber;
 
 import java.io.BufferedReader;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
-
-import gamestudio.jpa.RatingServiceJpa;
 import gamestudio.services.ScoreServicesMethods;
 
 public class GuessTheNumber {
@@ -64,8 +61,6 @@ public class GuessTheNumber {
 
 	public void startGuessTheNumber() throws SQLException {
 		String Game_name = "GuessTheNumber";
-		
-		
 		new ScoreServicesMethods().printScoreboard(Game_name);
 		new GuessTheNumber().guessTheNumberUI();
 //		GuessTheNumber gameStart = new GuessTheNumber();

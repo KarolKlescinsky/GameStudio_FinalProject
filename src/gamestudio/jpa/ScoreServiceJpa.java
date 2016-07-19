@@ -12,7 +12,5 @@ public class ScoreServiceJpa {
 		EntityManager em = JpaHelper.getEntityManager();		
 		em.persist(score);
 		JpaHelper.commitTransaction();
-		
 	}	
-	
 }

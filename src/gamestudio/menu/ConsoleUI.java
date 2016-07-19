@@ -106,9 +106,9 @@ public class ConsoleUI {
 				System.out.printf("%d. %s\t\t\t\t\t", option.ordinal() + 1, option);
 			}
 			String Game_name = option.toString();
-			//new RatingServicesMethods().averageRating(Game_name);
+			new RatingServicesMethods().averageRating(Game_name);
 			//new RatingServiceJpa().averageRating(Game_name);
-			new RatingServiceJpa().countOfRatings(Game_name);
+			//new RatingServiceJpa().countOfRatings(Game_name);
 		}
 		System.out.println();
 		System.out.println(

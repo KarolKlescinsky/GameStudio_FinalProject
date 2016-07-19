@@ -11,11 +11,9 @@ public class Rating {
 		this.game_id = game_id;
 		this.user_rating = user_rating;
 	}
-	
 	public Rating() {
 		this(0,0,0);
 	}
-	
 	public int getUser_id() {
 		return user_id;
 	}

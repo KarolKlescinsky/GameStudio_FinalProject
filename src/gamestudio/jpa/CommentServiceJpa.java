@@ -13,6 +13,5 @@ public class CommentServiceJpa {
 		EntityManager em = JpaHelper.getEntityManager();		
 		em.persist(comment);
 		JpaHelper.commitTransaction();
-		
-	}	
+		}	
 }

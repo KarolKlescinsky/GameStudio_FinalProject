@@ -30,6 +30,4 @@ public class Score {
 		this.user_score = user_score;
 	}
 	
-	
-	
 }

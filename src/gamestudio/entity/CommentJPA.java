@@ -19,12 +19,8 @@ public class CommentJPA {
 		this.game_name = game_name;
 		this.user_comment = user_comment;
 	}
-	
-	
 	public CommentJPA() {
 	}
-
-
 	public int getComment_id() {
 		return comment_id;
 	}

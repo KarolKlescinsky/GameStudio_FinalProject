@@ -29,7 +29,4 @@ public class Comment {
 	public void setUser_comment(String user_comment) {
 		this.user_comment = user_comment;
 	}
-	
-	
-	
 }

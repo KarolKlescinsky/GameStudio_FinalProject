@@ -15,5 +15,4 @@ public class ReadLine {
 			return null;
 		}
 	}
-
 }

@@ -7,7 +7,6 @@ import javax.persistence.Id;
 @Entity
 public class RatingJPA {
 
-
 	@Id
 	@GeneratedValue
 	private int rating_id;
@@ -21,15 +20,9 @@ public class RatingJPA {
 		this.game_name = game_name;
 		this.user_rating = user_rating;
 	}
-	
-	
-	
 	public RatingJPA() {
 		super();
 	}
-
-
-
 	public int getRating_id() {
 		return rating_id;
 	}

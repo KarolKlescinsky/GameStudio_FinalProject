@@ -19,11 +19,9 @@ public class ScoreJPA {
 		this.game_name = game_name;
 		this.user_score = user_score;
 	}
-	
 	public ScoreJPA() {
 
 	}
-
 	public int getScore_id() {
 		return score_id;
 	}
