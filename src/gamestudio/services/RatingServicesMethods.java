@@ -79,7 +79,6 @@ public class RatingServicesMethods implements RatingServices {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public boolean isUserAndGameUnique(String gameName) {

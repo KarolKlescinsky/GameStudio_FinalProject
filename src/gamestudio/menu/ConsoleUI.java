@@ -8,6 +8,9 @@ import java.text.ParseException;
 
 import gamestudio.entity.RatingJPA;
 import gamestudio.entity.ScoreJPA;
+import gamestudio.entity.entityjpql.CommentJPQL;
+import gamestudio.entity.entityjpql.GameJPQL;
+import gamestudio.entity.entityjpql.PlayerJPQL;
 import gamestudio.games.guessthenumber.GuessTheNumber;
 import gamestudio.games.hangman.HangMan;
 import gamestudio.games.miles.NPuzzle;
@@ -17,6 +20,7 @@ import gamestudio.jpa.ScoreServiceJpa;
 import gamestudio.services.CommentServicesMethods;
 import gamestudio.services.RatingServicesMethods;
 import gamestudio.services.ScoreServicesMethods;
+import gamestudio.services.servicesjpql.CommentJpqlMethods;
 import gamestudio.usefullmethods.ReadLine;
 
 public class ConsoleUI {
@@ -44,16 +48,16 @@ public class ConsoleUI {
 	}
 
 	private void hangman() throws SQLException {
-		String gameName = "Hangman";
-		String userName = System.getProperty("user.name");
+		//String gameName = "Hangman";
+		//String userName = System.getProperty("user.name");
 		// new CommentServiceJpa().addCommentToDatabase(new CommentJPA(userName,
 		// gameName, "Jpa test"));
 		//new ScoreServiceJpa().addScoreToDatabase(new ScoreJPA(userName,gameName, new HangMan().sendScore()));
 		//new RatingServiceJpa().addUniqueScoreToDatabase(new RatingJPA(userName, gameName, 4), userName, gameName);
 		new HangMan().startHangMan();
-		new CommentServicesMethods().writeComment(gameName, userName);
-		new ScoreServiceJpa().addScoreToDatabase(new ScoreJPA(userName,gameName, new HangMan().sendScore()));
-		new RatingServicesMethods().writeRating(gameName);
+		//new CommentServicesMethods().writeComment(gameName, userName);
+		//new ScoreServiceJpa().addScoreToDatabase(new ScoreJPA(userName,gameName, new HangMan().sendScore()));
+		//new RatingServicesMethods().writeRating(gameName);
 	}
 
 	private void guessTheNumber() throws SQLException {
@@ -63,36 +67,37 @@ public class ConsoleUI {
 		// gameName, "Jpa test"));
 		//new ScoreServicesMethods().addScore(gameName, new GuessTheNumber().sendScore());
 		//new RatingServiceJpa().addUniqueScoreToDatabase(new RatingJPA(userName, gameName, 4), userName, gameName);
+		new CommentJpqlMethods().addCommentJpql(new CommentJPQL("jpql", new PlayerJPQL(0, userName), new GameJPQL(0, gameName)));
 		new GuessTheNumber().startGuessTheNumber();
-		new CommentServicesMethods().writeComment(gameName, userName);
-		new ScoreServiceJpa().addScoreToDatabase(new ScoreJPA(userName,gameName, new GuessTheNumber().sendScore()));
-		new RatingServicesMethods().writeRating(gameName);
+		//new CommentServicesMethods().writeComment(gameName, userName);
+		//new ScoreServiceJpa().addScoreToDatabase(new ScoreJPA(userName,gameName, new GuessTheNumber().sendScore()));
+		//new RatingServicesMethods().writeRating(gameName);
 	}
 
 	private void miles() throws SQLException {
-		String gameName = "Miles";
-		String userName = System.getProperty("user.name");
+		//String gameName = "Miles";
+		//String userName = System.getProperty("user.name");
 		// new CommentServiceJpa().addCommentToDatabase(new CommentJPA(userName,
 		// gameName, "Jpa test"));
 		//new ScoreServicesMethods().addScore(gameName, new NPuzzle().sendScore());
 		//new RatingServiceJpa().addUniqueScoreToDatabase(new RatingJPA(userName, gameName, 4), userName, gameName);
 		new NPuzzle().startMiles();
-		new CommentServicesMethods().writeComment(gameName, userName);
-		new ScoreServicesMethods().addScore(gameName, new NPuzzle().sendScore());
-		new RatingServicesMethods().writeRating(gameName);
+		//new CommentServicesMethods().writeComment(gameName, userName);
+		//new ScoreServicesMethods().addScore(gameName, new NPuzzle().sendScore());
+		//new RatingServicesMethods().writeRating(gameName);
 	}
 
 	private void minesweeper() throws SQLException {
-		String gameName = "Minesweeper";
-		String userName = System.getProperty("user.name");
+		//String gameName = "Minesweeper";
+		//String userName = System.getProperty("user.name");
 		// new CommentServiceJpa().addCommentToDatabase(new CommentJPA(userName,
 		// gameName, "Jpa test"));
 		//new ScoreServicesMethods().addScore(gameName, new Minesweeper().sendScore());
 		//new RatingServiceJpa().addUniqueScoreToDatabase(new RatingJPA(userName, gameName, 4), userName, gameName);
 		new Minesweeper().startMinesweeper();
-		new CommentServicesMethods().writeComment(gameName, userName);
-		new ScoreServicesMethods().addScore(gameName, new Minesweeper().sendScore());
-		new RatingServicesMethods().writeRating(gameName);
+		//new CommentServicesMethods().writeComment(gameName, userName);
+		//new ScoreServicesMethods().addScore(gameName, new Minesweeper().sendScore());
+		//new RatingServicesMethods().writeRating(gameName);
 	}
 
 	private Option showMenu() throws SQLException {
@@ -101,12 +106,14 @@ public class ConsoleUI {
 			// System.out.printf("%d. %s\t\t\t\t\t\t", option.ordinal() + 1,
 			// option,(option.toString().length() <= 11 ? "\t" : "\t\t"));
 			if (option.toString().length() <= 11) {
-				System.out.printf("%d. %s\t\t\t\t\t\t", option.ordinal() + 1, option);
+				System.out.printf("%d. %s\t\t\t\t\t\t\n", option.ordinal() + 1, option);
 			} else {
-				System.out.printf("%d. %s\t\t\t\t\t", option.ordinal() + 1, option);
+				System.out.printf("%d. %s\t\t\t\t\t\n", option.ordinal() + 1, option);
 			}
-			String Game_name = option.toString();
-			new RatingServicesMethods().averageRating(Game_name);
+			//EDIT: Sysout v if else pre JPQL doplnene \n , bez JPQL \n nie je potrebne
+			
+			//String Game_name = option.toString();
+			//new RatingServicesMethods().averageRating(Game_name);
 			//new RatingServiceJpa().averageRating(Game_name);
 			//new RatingServiceJpa().countOfRatings(Game_name);
 		}

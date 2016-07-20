@@ -4,11 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+//@Entity
 public class CommentJPA {
 
-	@Id
-	@GeneratedValue
+	//@Id
+	//@GeneratedValue
 	private int comment_id;
 	private String user_name;
 	private String game_name;
@@ -45,14 +45,5 @@ public class CommentJPA {
 	public void setUser_comment(String user_comment) {
 		this.user_comment = user_comment;
 	}
-	
-	
-
-	
-	
-	
-
-		
-
 	
 }

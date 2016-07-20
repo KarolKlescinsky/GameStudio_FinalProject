@@ -4,11 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+//@Entity
 public class ScoreJPA {
 
-	@Id
-	@GeneratedValue
+	//@Id
+	//@GeneratedValue
 	private int score_id;
 	private String user_name;
 	private String game_name;

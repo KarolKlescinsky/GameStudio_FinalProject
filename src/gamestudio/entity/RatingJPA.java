@@ -4,11 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+//@Entity
 public class RatingJPA {
 
-	@Id
-	@GeneratedValue
+	//@Id
+	//@GeneratedValue
 	private int rating_id;
 	private String user_name;
 	private String game_name;

@@ -4,11 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+//@Entity
 public class Student {
 	
-	@Id
-	@GeneratedValue
+	//@Id
+	//@GeneratedValue
 	private int ident;
 
 	private String meno;
