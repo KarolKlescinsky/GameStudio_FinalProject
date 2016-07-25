@@ -11,7 +11,7 @@ public class RatingJPQL {
 
 	@Id
 	@GeneratedValue
-	private int scoreID;
+	private int ratingID;
 	private int rating;
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -23,19 +23,18 @@ public class RatingJPQL {
 	public RatingJPQL() {
 	}
 
-	public RatingJPQL(int scoreID, int rating, PlayerJPQL player, GameJPQL game) {
-		this.scoreID = scoreID;
+	public RatingJPQL (int rating, PlayerJPQL player, GameJPQL game) {
 		this.rating = rating;
 		this.player = player;
 		this.game = game;
 	}
 
-	public int getScoreID() {
-		return scoreID;
+	public int getRatingID() {
+		return ratingID;
 	}
 
-	public void setScoreID(int scoreID) {
-		this.scoreID = scoreID;
+	public void setRatingID(int ratingID) {
+		this.ratingID = ratingID;
 	}
 
 	public int getRating() {

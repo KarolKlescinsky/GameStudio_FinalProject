@@ -1,5 +1,6 @@
 package gamestudio.entity.entityjpql;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,12 +11,12 @@ public class PlayerJPQL {
 	@Id
 	@GeneratedValue
 	private int playerID;
+	@Column(unique=true)
 	private String playerName;
 
 	public PlayerJPQL() {
 	}
-	public PlayerJPQL(int playerID, String playerName) {
-		this.playerID = playerID;
+	public PlayerJPQL(String playerName) {
 		this.playerName = playerName;
 	}
 	public int getPlayerID() {

@@ -23,8 +23,7 @@ public class ScoreJPQL {
 	public ScoreJPQL() {
 	}
 
-	public ScoreJPQL(int scoreID, int score, PlayerJPQL player, GameJPQL game) {
-		this.scoreID = scoreID;
+	public ScoreJPQL(int score, PlayerJPQL player, GameJPQL game) {
 		this.score = score;
 		this.player = player;
 		this.game = game;
