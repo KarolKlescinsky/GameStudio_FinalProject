@@ -58,17 +58,11 @@ public class UsefullServicesJpqlMethods {
 
 	public PlayerJPQL findPlayerObjectbyID(String userName) {
 		EntityManager em = JpaHelper.getEntityManager();
-		System.out.println(userName);
-		System.out.println(em.find(PlayerJPQL.class, getPlayerIdOfUniquePlayer(userName)));
-		System.out.println(getPlayerIdOfUniquePlayer(userName));
 		return em.find(PlayerJPQL.class, getPlayerIdOfUniquePlayer(userName));
 	}
 
 	public GameJPQL findGameObjectbyID(String gameName) {
 		EntityManager em = JpaHelper.getEntityManager();
-		System.out.println(gameName);
-		System.out.println(em.find(GameJPQL.class, getGameIdOfUniqueGame(gameName)));
-		System.out.println(getGameIdOfUniqueGame(gameName));
 		return em.find(GameJPQL.class, getGameIdOfUniqueGame(gameName));
 	}
 

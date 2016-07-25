@@ -8,7 +8,7 @@ import sk.ness.jpa.JpaHelper;
 
 public class RatingServiceJpa {
 
-	public void addScoreToDatabaseWhichCanExistAlready(RatingJPA rating, String userName ) {
+	public void addRatingToDatabaseWhichCanExistAlready(RatingJPA rating, String userName ) {
 		JpaHelper.beginTransaction();
 		EntityManager em = JpaHelper.getEntityManager();		
 		em.persist(rating);
@@ -24,12 +24,12 @@ public class RatingServiceJpa {
 		JpaHelper.commitTransaction();
 	}
 	
-	public void addUniqueScoreToDatabase(RatingJPA rating,String userName,String gameName){
+	public void addUniqueRatingToDatabase(RatingJPA rating,String userName,String gameName){
 		if(isUserNameAndGameNameUnique(userName, gameName)){
-			addScoreToDatabaseWhichCanExistAlready(rating, userName);
+			addRatingToDatabaseWhichCanExistAlready(rating, userName);
 		}else{
 			deleteExistingScore(rating, userName);
-			addScoreToDatabaseWhichCanExistAlready(rating, userName);
+			addRatingToDatabaseWhichCanExistAlready(rating, userName);
 		}
 	}
 	

@@ -81,16 +81,17 @@ public class ConsoleUI {
 		// GuessTheNumber().sendScore());
 		// new RatingServiceJpa().addUniqueScoreToDatabase(new
 		// RatingJPA(userName, gameName, 4), userName, gameName);
-		
 
-		new RatingJpqlMethods().ratingToDatabaseJPQL(gameName, userName);
+	//	new RatingJpqlMethods().ratingToDatabaseJPQL(gameName, userName);
+
+		new RatingJpqlMethods().addUniqueScoreToDatabase(userName, gameName);
+		new CommentJpqlMethods().commentToDatabaseJPQL(gameName, userName);
 
 		new GuessTheNumber().startGuessTheNumber();
 		new ScoreJpqlMethods().scoreToDatabaseJPQL(userScore, gameName, userName);
-		new CommentJpqlMethods().commentToDatabaseJPQL(gameName, userName);
+		
+		
 
-		
-		
 		// new CommentServicesMethods().writeComment(gameName, userName);
 		// new ScoreServiceJpa().addScoreToDatabase(new
 		// ScoreJPA(userName,gameName, new GuessTheNumber().sendScore()));
@@ -142,10 +143,14 @@ public class ConsoleUI {
 			// EDIT: Sysout v if else pre JPQL doplnene \n , bez JPQL \n nie je
 			// potrebne
 
-			// String Game_name = option.toString();
-			// new RatingServicesMethods().averageRating(Game_name);
-			// new RatingServiceJpa().averageRating(Game_name);
-			// new RatingServiceJpa().countOfRatings(Game_name);
+			String gameName = option.toString();
+
+//			 new RatingJpqlMethods().averageRating(gameName);
+//			 new RatingJpqlMethods().countOfRatings(gameName);
+
+			// new RatingServicesMethods().averageRating(gameName);
+			// new RatingServiceJpa().averageRating(gameName);
+			// new RatingServiceJpa().countOfRatings(gameName);
 		}
 		System.out.println();
 		System.out.println(
@@ -157,5 +162,5 @@ public class ConsoleUI {
 		} while (selection <= 0 || selection > Option.values().length);
 		return Option.values()[selection - 1];
 	}
-		
+
 }
