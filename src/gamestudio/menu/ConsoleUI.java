@@ -82,16 +82,11 @@ public class ConsoleUI {
 		// new RatingServiceJpa().addUniqueScoreToDatabase(new
 		// RatingJPA(userName, gameName, 4), userName, gameName);
 
-	//	new RatingJpqlMethods().ratingToDatabaseJPQL(gameName, userName);
-
-		new RatingJpqlMethods().addUniqueScoreToDatabase(userName, gameName);
+		new RatingJpqlMethods().addUniqueScoreToDatabase(gameName, userName);
 		new CommentJpqlMethods().commentToDatabaseJPQL(gameName, userName);
-
 		new GuessTheNumber().startGuessTheNumber();
 		new ScoreJpqlMethods().scoreToDatabaseJPQL(userScore, gameName, userName);
 		
-		
-
 		// new CommentServicesMethods().writeComment(gameName, userName);
 		// new ScoreServiceJpa().addScoreToDatabase(new
 		// ScoreJPA(userName,gameName, new GuessTheNumber().sendScore()));
@@ -145,8 +140,9 @@ public class ConsoleUI {
 
 			String gameName = option.toString();
 
-//			 new RatingJpqlMethods().averageRating(gameName);
-//			 new RatingJpqlMethods().countOfRatings(gameName);
+			// new RatingJpqlMethods().averageRating(gameName);
+			 new RatingJpqlMethods().countOfRatings(gameName);
+			 
 
 			// new RatingServicesMethods().averageRating(gameName);
 			// new RatingServiceJpa().averageRating(gameName);

@@ -74,7 +74,7 @@ public class RatingJpqlMethods {
 		JpaHelper.commitTransaction();
 	}
 
-	public void addUniqueScoreToDatabase(String userName, String gameName) {
+	public void addUniqueScoreToDatabase(String gameName,String userName) {
 		if (new UsefullServicesJpqlMethods().isGameUniqueJpql(gameName)
 				&& new UsefullServicesJpqlMethods().isUserUniqueJpql(userName)) {
 			ratingToDatabaseJPQL(gameName, userName);
@@ -86,15 +86,15 @@ public class RatingJpqlMethods {
 
 	public void averageRating(String gameName){
 	 EntityManager em = JpaHelper.getEntityManager();
-	 Query query =em.createQuery("Select AVG(cast(r.user_rating as double)) FROM RatingJPQL r Where r.game_name=:gameName");
-	 query.setParameter("gameName" , gameName);
+	 Query query =em.createQuery("Select AVG(cast(r.rating as double)) FROM RatingJPQL r Where r.game=:gameID");
+	 query.setParameter("gameID" , new UsefullServicesJpqlMethods().findGameObjectbyID(gameName));
 	 System.out.println(query.getResultList());
 	 }
-
+	
 	public void countOfRatings(String gameName){
 	 EntityManager em = JpaHelper.getEntityManager();
-	 Query query =em.createQuery("Select Count(r.user_rating) FROM RatingJPA r Where r.game_name=:gameName");
-	 query.setParameter("gameName" , gameName);
+	 Query query =em.createQuery("Select Count(r.rating) FROM RatingJPQL r Where r.game=:gameID");
+	 query.setParameter("gameID" , new UsefullServicesJpqlMethods().findGameObjectbyID(gameName));
 	 System.out.println(query.getResultList());
 	 }
 

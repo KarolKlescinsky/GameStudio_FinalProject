@@ -40,7 +40,7 @@ public class UsefullServicesJpqlMethods {
 		EntityManager em = JpaHelper.getEntityManager();
 		Query query = em.createQuery("SELECT gameID FROM GameJPQL g WHERE g.gameName =:gameName");
 		query.setParameter("gameName", gameName);
-
+		
 		int ident = (int) query.getResultList().get(0);
 		return ident;
 	}
